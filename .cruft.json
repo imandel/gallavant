@@ -1,0 +1,21 @@
+{
+  "template": "https://github.com/cabreraalex/widget-svelte-cookiecutter.git",
+  "commit": "c4358bb9b68001ae375f90e524f1c273a94e8bb5",
+  "context": {
+    "cookiecutter": {
+      "author_name": "ilan",
+      "author_email": "im334@cornell.edu",
+      "github_project_name": "vanity",
+      "github_organization_name": "",
+      "python_package_name": "vanity_widget",
+      "npm_package_name": "vanity_widget",
+      "npm_package_version": "0.1.0",
+      "project_short_description": "A Custom Jupyter Widget Library",
+      "_copy_without_render": [
+        ".github/workflows/*"
+      ],
+      "_template": "https://github.com/cabreraalex/widget-svelte-cookiecutter.git"
+    }
+  },
+  "directory": null
+}
