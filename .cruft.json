@@ -5,10 +5,10 @@
     "cookiecutter": {
       "author_name": "ilan",
       "author_email": "im334@cornell.edu",
-      "github_project_name": "vanity",
+      "github_project_name": "gallavant",
       "github_organization_name": "",
-      "python_package_name": "vanity_widget",
-      "npm_package_name": "vanity_widget",
+      "python_package_name": "gallavant",
+      "npm_package_name": "gallavant",
       "npm_package_version": "0.1.0",
       "project_short_description": "A Custom Jupyter Widget Library",
       "_copy_without_render": [

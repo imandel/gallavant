@@ -15,8 +15,6 @@
   export let position;
   export let velocity;
   export let hideSaved = false;
-
-//   let hideSaved = false;
   export let sendBackendMsg;
   export let volume = 1;
 
@@ -419,6 +417,7 @@
   >
     &gt;&gt;
   </button>
+  <!-- svelte-ignore a11y-no-onchange -->
   <select
     bind:value={$timingObject.playingVelocity}
     on:change={() => {

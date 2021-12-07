@@ -75,13 +75,14 @@ export class ExampleView extends DOMWidgetView {
 export class ViewMap extends DOMWidgetView {
   render() {
     setStoreModels(this.model);
-    new Widget({ target: this.el, 
+    new Widget({
+      target: this.el,
       props: {
         model: this.model,
       },
     });
   }
-  remove(){
+  remove() {
     console.log('remove')
     destroyModelStores();
   }

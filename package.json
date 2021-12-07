@@ -1,5 +1,5 @@
 {
-  "name": "vanity_widget",
+  "name": "gallavant",
   "version": "0.1.0",
   "description": "A Custom Jupyter Widget Library",
   "keywords": [
@@ -13,9 +13,9 @@
     "dist/*.js",
     "css/*.css"
   ],
-  "homepage": "https://github.com//vanity",
+  "homepage": "https://github.com/imandel/gallavant",
   "bugs": {
-    "url": "https://github.com//vanity/issues"
+    "url": "https://github.com/imandel/gallavant/issues"
   },
   "license": "BSD-3-Clause",
   "author": {
@@ -26,15 +26,15 @@
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com//vanity"
+    "url": "https://github.com/imandel/gallavant"
   },
   "scripts": {
     "build": "webpack --mode=development && jupyter labextension build --development=True .",
     "build:prod": "webpack --mode=production && jupyter labextension build .",
     "clean": "yarn run clean:lib && yarn run clean:nbextension && yarn run clean:labextension",
     "clean:lib": "rimraf lib",
-    "clean:labextension": "rimraf vanity_widget/labextension",
-    "clean:nbextension": "rimraf vanity_widget/nbextension/static/index.js",
+    "clean:labextension": "rimraf gallavant/labextension",
+    "clean:nbextension": "rimraf gallavant/nbextension/static/index.js",
     "lint": "eslint . --ext .ts,.tsx,.svelte --fix",
     "lint:check": "eslint . --ext .ts,.tsx,.svelte",
     "prepack": "yarn run build:prod",
@@ -88,7 +88,7 @@
   },
   "jupyterlab": {
     "extension": "lib/index",
-    "outputDir": "vanity_widget/labextension/",
+    "outputDir": "gallavant/labextension/",
     "sharedPackages": {
       "@jupyter-widgets/base": {
         "bundled": false,

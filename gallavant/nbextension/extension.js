@@ -6,7 +6,7 @@ define(function() {
     window['requirejs'].config({
         map: {
             '*': {
-                'vanity_widget': 'nbextensions/vanity_widget/index',
+                'gallavant': 'nbextensions/gallavant/index',
             },
         }
     });

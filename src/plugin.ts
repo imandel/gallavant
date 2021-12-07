@@ -11,7 +11,7 @@ import * as widgetExports from './widget';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
-const EXTENSION_ID = 'vanity_widget:plugin';
+const EXTENSION_ID = 'gallavant:plugin';
 
 /**
  * The example plugin.

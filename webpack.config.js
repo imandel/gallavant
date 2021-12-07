@@ -58,7 +58,7 @@ module.exports = [
     entry: './src/extension.ts',
     output: {
       filename: 'index.js',
-      path: path.resolve(__dirname, 'vanity_widget', 'nbextension'),
+      path: path.resolve(__dirname, 'gallavant', 'nbextension'),
       libraryTarget: 'amd',
       publicPath: '',
     },
@@ -71,7 +71,7 @@ module.exports = [
   },
 
   /**
-   * Embeddable vanity_widget bundle
+   * Embeddable gallavant bundle
    *
    * This bundle is almost identical to the notebook extension bundle. The only
    * difference is in the configuration of the webpack public path for the
@@ -86,8 +86,8 @@ module.exports = [
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
         libraryTarget: 'amd',
-        library: "vanity_widget",
-        publicPath: 'https://unpkg.com/vanity_widget@' + version + '/dist/'
+        library: "gallavant",
+        publicPath: 'https://unpkg.com/gallavant@' + version + '/dist/'
     },
     module: {
         rules: rules
@@ -107,7 +107,7 @@ module.exports = [
     output: {
       filename: 'embed-bundle.js',
       path: path.resolve(__dirname, 'docs', 'source', '_static'),
-      library: "vanity_widget",
+      library: "gallavant",
       libraryTarget: 'amd'
     },
     module: {

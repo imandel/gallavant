@@ -5,7 +5,7 @@
 # Distributed under the terms of the Modified BSD License.
 
 from .example import ExampleWidget
-from .vanity import MapView
+from .gallavant import MapView
 from ._version import __version__, version_info
 
 def _jupyter_labextension_paths():
@@ -22,7 +22,7 @@ def _jupyter_labextension_paths():
     """
     return [{
         'src': 'labextension',
-        'dest': 'vanity_widget',
+        'dest': 'gallavant',
     }]
 
 
@@ -45,6 +45,6 @@ def _jupyter_nbextension_paths():
     return [{
         'section': 'notebook',
         'src': 'nbextension',
-        'dest': 'vanity_widget',
-        'require': 'vanity_widget/extension'
+        'dest': 'gallavant',
+        'require': 'gallavant/extension'
     }]

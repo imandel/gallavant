@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 # The name of the project
-name = 'vanity_widget'
+name = 'gallavant'
 
 # Get the version
 version = get_version(pjoin(name, '_version.py'))
@@ -45,14 +45,14 @@ package_data_spec = {
 
 
 data_files_spec = [
-    ('share/jupyter/nbextensions/vanity_widget',
-     'vanity_widget/nbextension', '**'),
-    ('share/jupyter/labextensions/vanity_widget',
-     'vanity_widget/labextension', '**'),
-    ('share/jupyter/labextensions/vanity_widget',
+    ('share/jupyter/nbextensions/gallavant',
+     'gallavant/nbextension', '**'),
+    ('share/jupyter/labextensions/gallavant',
+     'gallavant/labextension', '**'),
+    ('share/jupyter/labextensions/gallavant',
      '.', 'install.json'),
     ('etc/jupyter/nbconfig/notebook.d', '.',
-     'vanity_widget.json'),
+     'gallavant.json'),
 ]
 
 
@@ -73,7 +73,7 @@ setup_args = dict(
     packages=find_packages(),
     author='ilan',
     author_email='im334@cornell.edu',
-    url='https://github.com//vanity',
+    url='https://github.com/imandel/gallavant',
     license='BSD',
     platforms="Linux, Mac OS X, Windows",
     keywords=['Jupyter', 'Widgets', 'IPython'],
@@ -93,6 +93,7 @@ setup_args = dict(
     python_requires=">=3.6",
     install_requires=[
         'ipywidgets>=7.0.0',
+        'pandas>=1.3.0'
     ],
     extras_require={
         'examples': [

@@ -1,7 +1,7 @@
-# vanity
+# gallavant
 
-[![Build Status](https://travis-ci.org//vanity.svg?branch=master)](https://travis-ci.org//vanity_widget)
-[![codecov](https://codecov.io/gh//vanity/branch/master/graph/badge.svg)](https://codecov.io/gh//vanity)
+[![Build Status](https://travis-ci.org//gallavant.svg?branch=master)](https://travis-ci.org//gallavant)
+[![codecov](https://codecov.io/gh//gallavant/branch/master/graph/badge.svg)](https://codecov.io/gh//gallavant)
 
 A Custom Jupyter Widget Library
 
@@ -10,14 +10,14 @@ A Custom Jupyter Widget Library
 You can install using `pip`:
 
 ```bash
-pip install vanity_widget
+pip install gallavant
 ```
 
 If you are using Jupyter Notebook 5.2 or earlier, you may also need to enable
 the nbextension:
 
 ```bash
-jupyter nbextension enable --py [--sys-prefix|--user|--system] vanity_widget
+jupyter nbextension enable --py [--sys-prefix|--user|--system] gallavant
 ```
 
 ## Development Installation
@@ -25,8 +25,8 @@ jupyter nbextension enable --py [--sys-prefix|--user|--system] vanity_widget
 Create a dev environment:
 
 ```bash
-conda create -n vanity_widget-dev -c conda-forge nodejs yarn python jupyterlab
-conda activate vanity_widget-dev
+conda create -n gallavant-dev -c conda-forge nodejs yarn python jupyterlab
+conda activate gallavant-dev
 ```
 
 Install the python. This will also build the TS package.
@@ -46,8 +46,8 @@ yarn run build
 For classic notebook, you need to run:
 
 ```
-jupyter nbextension install --sys-prefix --symlink --overwrite --py vanity_widget
-jupyter nbextension enable --sys-prefix --py vanity_widget
+jupyter nbextension install --sys-prefix --symlink --overwrite --py gallavant
+jupyter nbextension enable --sys-prefix --py gallavant
 ```
 
 Note that the `--symlink` flag doesn't work on Windows, so you will here have to run

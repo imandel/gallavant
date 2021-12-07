@@ -8,7 +8,7 @@ include .coverage.rc
 include tsconfig.json
 include package.json
 include webpack.config.js
-include vanity_widget/labextension/*.tgz
+include gallavant/labextension/*.tgz
 
 # Documentation
 graft docs
@@ -21,7 +21,7 @@ prune docs/dist
 graft examples
 
 # Javascript files
-graft vanity_widget/nbextension
+graft gallavant/nbextension
 graft src
 prune **/node_modules
 prune lib

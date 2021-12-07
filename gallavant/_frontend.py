@@ -8,5 +8,5 @@
 Information about the frontend package of the widgets.
 """
 
-module_name = "vanity_widget"
+module_name = "gallavant"
 module_version = "^0.1.0"
