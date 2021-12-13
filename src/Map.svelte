@@ -112,6 +112,7 @@
   }
 
   onMount(async () => {
+    console.log('mounting')
     if ($gps) {
       const res = await fetch($gps).catch((err) => {
         console.error(err);

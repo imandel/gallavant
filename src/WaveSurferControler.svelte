@@ -14,10 +14,8 @@
   export let videoElement;
   export let position;
   export let velocity;
-  export let hideSaved = false;
   export let sendBackendMsg;
   export let volume = 1;
-
   export const tagAction = (action) => {
     actionState = true;
     switch (action) {
@@ -33,7 +31,9 @@
     actionState = false;
     return true;
   };
+  export const toggleHideSaved = () =>{hideSaved = !hideSaved; return true}
 
+  let hideSaved = false;
   let wavesurfer;
   let waveform;
   let regionPlayed;

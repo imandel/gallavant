@@ -6,18 +6,25 @@ export function getId(prefix: string): string {
     return prefix + Math.random().toString(32).substring(2);
   }
 
-// export function processKey(e: KeyboardEvent): {string, KeyboardEvent} {
-//   let shortcut: string = '';
-// if (e.ctrlKey) {
-//     shortcut += 'ctrl+';
-// }
-// if (e.altKey) {
-//     shortcut += 'alt+';
-// }
-// if (e.shiftKey) {
-//     shortcut += 'shift+';
-// }
 
-// e.shortcut = shortcut
-// return shortcut += e.code
-// }
+export interface keyConfig {
+  [index: string]: Function;
+}
+
+export function processKey(e: KeyboardEvent, config: keyConfig): void {
+  let shortcut: string = '';
+if (e.ctrlKey) {
+    shortcut += 'ctrl+';
+}
+if (e.altKey) {
+    shortcut += 'alt+';
+}
+if (e.shiftKey) {
+    shortcut += 'shift+';
+}
+shortcut += e.code
+console.log(shortcut)
+if(config[shortcut]?.(e)){ return }
+else{ config['quicktag'](e)}
+
+}

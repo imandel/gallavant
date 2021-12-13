@@ -9,7 +9,7 @@
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
   import Tagbox from './Tagbox.svelte';
-
+  import { processKey, keyConfig } from './util';
   // get model for backend comms
   // https://www.grizzly-hills.com/2020/08/05/jupyter-widgets-sending-custom-event-to-frontend-from-backend/
   export let model: DOMWidgetModel;
@@ -35,26 +35,30 @@
   let volume = 1;
   let widget: HTMLElement;
   let topRow: HTMLElement;
-  let videoElement: HTMLVideoElement; // = document.createElement("video");
+  let videoElement: HTMLVideoElement; 
   let height: string;
   let map: boolean = false;
   let wavesurfercontroller: SvelteComponent;
   let tagbox: SvelteComponent;
 
-  const config = {
-  "ctrl+KeyQ": (e: KeyboardEvent) => {tagbox.quickTag = !tagbox.quickTag; return true},
-  "ctrl+KeyS": (e: KeyboardEvent) => {return wavesurfercontroller.tagAction('save')},
-  "ctrl+Backspace": (e: KeyboardEvent) => {return wavesurfercontroller.tagAction('delete')},
-  "ctrl+KeyH": (e: KeyboardEvent) => { wavesurfercontroller.hideSaved = !wavesurfercontroller.hideSaved; return true}, 
-  "shift+Tab": (e: KeyboardEvent) => { e.preventDefault(); wavesurfercontroller.selectNextTag('reverse'); return true }, 
-  "Tab": (e: KeyboardEvent) => {  e.preventDefault(); wavesurfercontroller.selectNextTag('forward'); return true }, 
-  "shift+ArrowLeft": (e: KeyboardEvent) => { $timingObject.updatePos(-10); return true },
-  "shift+ArrowRight": (e: KeyboardEvent) => { $timingObject.updatePos(-10); return true },
-  "shift+Space": (e: KeyboardEvent) => { $timingObject.togglePlay(); return true },
+  const config: keyConfig = {
+  'ctrl+KeyQ': (e: KeyboardEvent) => tagbox.toggleQuickTag(),
+  'ctrl+KeyS': (e: KeyboardEvent) => wavesurfercontroller.tagAction('save'),
+  'ctrl+Backspace': (e: KeyboardEvent) => wavesurfercontroller.tagAction('delete'),
+  'ctrl+KeyH': (e: KeyboardEvent) => wavesurfercontroller.toggleHideSaved(), 
+  'shift+Tab': (e: KeyboardEvent) => { e.preventDefault(); wavesurfercontroller.selectNextTag('reverse'); return true }, 
+  'Tab': (e: KeyboardEvent) => {  e.preventDefault(); wavesurfercontroller.selectNextTag('forward'); return true }, 
+  'shift+ArrowLeft': (e: KeyboardEvent) => { $timingObject.updatePos(-10); return true },
+  'shift+ArrowRight': (e: KeyboardEvent) => { $timingObject.updatePos(10); return true },
+  'shift+Space': (e: KeyboardEvent) => {  e.preventDefault(); $timingObject.togglePlay(); return true },
+  'quicktag' : (e: KeyboardEvent) => tagbox.quickTagAction(e)
+  // "quicktag": (e: KeyboardEvent) => {
+  //   const idx = tagbox.shortcuts.indexOf(e.key)
+  //   if (tagbox.quickTag && idx >=0){ tagbox.tagChecks.children[idx].firstElementChild.click() }
+  // }
 }
 
-
-
+// TODO: move this functionality into custom store
   const updateTiming = () => {
     ({ velocity, position } = $timingObject.query());
     requestAnimationFrame(updateTiming);
@@ -62,7 +66,7 @@
 
 
   onMount(() => {
-    widget.onkeydown = (e) => console.log(e);
+    widget.onkeydown = (e) => processKey(e, config);
     //
     requestAnimationFrame(updateTiming);
     model.on('msg:custom', handleBackendMsg);
@@ -76,7 +80,6 @@
     topRow.style.height = `${height}px`;
   }
 </script>
-
 <div class="widget" bind:this={widget} tabindex="-1">
   <div class="container" bind:this={topRow}>
     <MainVid

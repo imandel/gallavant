@@ -1,10 +1,17 @@
 <script>
   import { curKeypoint, tags } from './stores';
-  import { onMount } from 'svelte';
 
   export let position;
-  export let quickTag = false
-
+  export const toggleQuickTag = () => {quickTag = !quickTag; return true};
+  export const quickTagAction = (e) => {
+    const idx = shortcuts.indexOf(e.key)
+    if (quickTag && idx >=0){ tagChecks.children[idx].firstElementChild.click() }
+  }
+  
+  let shortcuts = 'qwerasdfzxcvtyuighjk'.slice(0,$tags.length);
+  let tagChecks;
+  let quickTag = false
+  
   let start;
   let end;
   let newLabel;
@@ -18,10 +25,6 @@
     }
   };
 
-  let tagChecks;
-  let shortcuts = 'qwerasdfzxcvtyuighjk'; //.slice(0,$tags.length)
-
-  // the if for inputs is kinda hacky but ¯\_(°ペ)_/¯
 </script>
 
 <div class="tagbox">
@@ -77,7 +80,6 @@
   </div>
   <div class="tagChecks" bind:this={tagChecks}>
     {#each $tags as tag, index}
-      <!-- <div on:dblclick={lockTag}></div> -->
       <div>
         <input
           type="checkbox"
