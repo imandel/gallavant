@@ -1,9 +1,10 @@
-# gallavant
+# Gallavant
 
-[![Build Status](https://travis-ci.org//gallavant.svg?branch=master)](https://travis-ci.org//gallavant)
-[![codecov](https://codecov.io/gh//gallavant/branch/master/graph/badge.svg)](https://codecov.io/gh//gallavant)
+<!-- [![Build Status](https://travis-ci.org//gallavant.svg?branch=master)](https://travis-ci.org//gallavant)
+[![codecov](https://codecov.io/gh//gallavant/branch/master/graph/badge.svg)](https://codecov.io/gh//gallavant) -->
 
-A Custom Jupyter Widget Library
+A jupyter widget for analysis of geospatial video data
+
 
 ## Installation
 
@@ -19,6 +20,31 @@ the nbextension:
 ```bash
 jupyter nbextension enable --py [--sys-prefix|--user|--system] gallavant
 ```
+
+## Usage
+
+### Initialization
+![init](./assets/init.gif)
+
+The first load may be a bit slow but will create a `.peaks.json` file in the same directory as your source video. Subsequent loads will be significantly faster. 
+#### Optional:
+for more screen real estate run
+```python
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:100% !important; }</style>"))
+```
+
+### Navigation
+Navigate a video by clicking the timeline, a transcript line, or a point on the map.
+![navigation](assets/navigation.gif)
+
+### Tag Selection 
+
+
+
+## Data Formats and Structure
+
+
 
 ## Development Installation
 
