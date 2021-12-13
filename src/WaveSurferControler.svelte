@@ -31,7 +31,10 @@
     actionState = false;
     return true;
   };
-  export const toggleHideSaved = () =>{hideSaved = !hideSaved; return true}
+  export const toggleHideSaved = () => {
+    hideSaved = !hideSaved;
+    return true;
+  };
 
   let hideSaved = false;
   let wavesurfer;
@@ -49,20 +52,19 @@
 
   let actionState = false;
   let onHidesaveChanged = (hideSaved) => {
-	  if(wavesurfer?.regions?.list)
-	  {
-        if (hideSaved) {
-          Object.values(wavesurfer.regions.list)
-            .filter((region) => region?.data?.saved && region !== activeRegion)
-            .forEach((region) => (region.element.style.visibility = 'hidden'));
-        } else {
-          Object.values(wavesurfer.regions.list).forEach(
-            (region) => (region.element.style.visibility = 'visible')
-          );
-        }
-        return true;
-	}
-	}
+    if (wavesurfer?.regions?.list) {
+      if (hideSaved) {
+        Object.values(wavesurfer.regions.list)
+          .filter((region) => region?.data?.saved && region !== activeRegion)
+          .forEach((region) => (region.element.style.visibility = 'hidden'));
+      } else {
+        Object.values(wavesurfer.regions.list).forEach(
+          (region) => (region.element.style.visibility = 'visible')
+        );
+      }
+      return true;
+    }
+  };
   $: onHidesaveChanged(hideSaved);
   $: if (wavesurfer && $curKeypoint.start) {
     if (
@@ -401,7 +403,9 @@
     &lt
   </button>
   <button
-    on:click={() => {$timingObject.togglePlay()}}>{velocity ? 'pause' : 'play'}</button
+    on:click={() => {
+      $timingObject.togglePlay();
+    }}>{velocity ? 'pause' : 'play'}</button
   >
   <button
     on:click={() => {

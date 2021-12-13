@@ -1,7 +1,7 @@
 {
   "name": "gallavant",
   "version": "0.1.0",
-  "description": "A Custom Jupyter Widget Library",
+  "description": "A Custom Jupyter Widget Library for video analysis of geospatial data",
   "keywords": [
     "jupyter",
     "jupyterlab",
@@ -74,7 +74,8 @@
     "identity-obj-proxy": "^3.0.0",
     "mkdirp": "^0.5.1",
     "npm-run-all": "^4.1.3",
-    "prettier": "^2.0.5",
+    "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.5.1",
     "rimraf": "^2.6.2",
     "source-map-loader": "^1.1.3",
     "style-loader": "^1.0.0",

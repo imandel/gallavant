@@ -1,5 +1,5 @@
 import type { Writable } from 'svelte/store';
-import type { DOMWidgetModel } from '@jupyter-widgets/base'
+import type { DOMWidgetModel } from '@jupyter-widgets/base';
 
 import { writable, get } from 'svelte/store';
 
@@ -14,19 +14,22 @@ interface VideoTimingObject extends ITimingObject {
 
 class VideoTimingObject extends TimingObject {
   constructor() {
-    super()
-    this.playingVelocity = 1
+    super();
+    this.playingVelocity = 1;
     this.togglePlay = () => {
-      this.query().velocity ? this.update({ velocity: 0 }) :
-        this.update({ velocity: this.playingVelocity })
-    }
+      this.query().velocity
+        ? this.update({ velocity: 0 })
+        : this.update({ velocity: this.playingVelocity });
+    };
     this.updatePos = (timeDelta) => {
       const newTime: number = Math.max(this.query().position + timeDelta, 0);
       this.update({ position: newTime });
-    }
+    };
   }
 }
-export const timingObject: Writable<VideoTimingObject> = writable(new VideoTimingObject());
+export const timingObject: Writable<VideoTimingObject> = writable(
+  new VideoTimingObject()
+);
 
 interface PT {
   src: string;
@@ -37,7 +40,6 @@ interface PT {
   tags: Array<string>;
   comments: string | null | undefined;
 }
-
 
 interface WidgetWritable<T> extends Writable<T> {
   setModel: (m: DOMWidgetModel) => void;
@@ -80,7 +82,6 @@ function createKeypoint() {
   };
 }
 
-
 export function WidgetWritable<T>(name_: string, value_: T): WidgetWritable<T> {
   const name: string = name_;
   const internalWritable: Writable<any> = writable(value_);
@@ -103,36 +104,41 @@ export function WidgetWritable<T>(name_: string, value_: T): WidgetWritable<T> {
           model.save_changes();
         }
         return output;
-      })
+      });
     },
     setModel: (m: DOMWidgetModel) => {
       model = m;
-      let modelValue = model.get(name)
-      console.log(name, modelValue)
-      if (modelValue) internalWritable.set(modelValue)
-      model.on('change:' + name, () => internalWritable.set(model.get(name)), null)
-    }
-  }
+      const modelValue = model.get(name);
+      console.log(name, modelValue);
+      if (modelValue) {
+        internalWritable.set(modelValue);
+      }
+      model.on(
+        'change:' + name,
+        () => internalWritable.set(model.get(name)),
+        null
+      );
+    },
+  };
 }
 
 // Declare stores with their associated Traitlets here.
-export const gps = WidgetWritable<string>('gps', '')
-export const vidSrc = WidgetWritable<string>('src', '')
-export const peaksSrc = WidgetWritable<string>('peaks', '')
+export const gps = WidgetWritable<string>('gps', '');
+export const vidSrc = WidgetWritable<string>('src', '');
+export const peaksSrc = WidgetWritable<string>('peaks', '');
 export const transcriptSrc = WidgetWritable<string>('transcript', '');
-export const transcriptLang = WidgetWritable<string>('transcript_lang', '')
+export const transcriptLang = WidgetWritable<string>('transcript_lang', '');
 export const cueData = writable([]);
-export const mapStyle = WidgetWritable<string>('map_style', '')
-export const duration = WidgetWritable<string>('duration', '')
-export const views = WidgetWritable<Array<string>>('views', [])
-export const author = WidgetWritable<string>('author', '')
-export const keypoints = WidgetWritable<Array<string>>('_keypoints', [])
-export const review = WidgetWritable<Array<string>>('review', [])
-export const tags = WidgetWritable<Array<string>>('tags', [])
+export const mapStyle = WidgetWritable<string>('map_style', '');
+export const duration = WidgetWritable<string>('duration', '');
+export const views = WidgetWritable<Array<string>>('views', []);
+export const author = WidgetWritable<string>('author', '');
+export const keypoints = WidgetWritable<Array<string>>('_keypoints', []);
+export const review = WidgetWritable<Array<string>>('review', []);
+export const tags = WidgetWritable<Array<string>>('tags', []);
 
 // Set the model for each store you create.
 export function setStoreModels(model: DOMWidgetModel): void {
-
   gps.setModel(model);
   vidSrc.setModel(model);
   peaksSrc.setModel(model);
@@ -153,8 +159,7 @@ export function setStoreModels(model: DOMWidgetModel): void {
     end: null,
     tags: [],
     comments: null,
-  })
-
+  });
 }
 
 export function destroyModelStores(): void {

@@ -2,16 +2,21 @@
   import { curKeypoint, tags } from './stores';
 
   export let position;
-  export const toggleQuickTag = () => {quickTag = !quickTag; return true};
+  export const toggleQuickTag = () => {
+    quickTag = !quickTag;
+    return true;
+  };
   export const quickTagAction = (e) => {
-    const idx = shortcuts.indexOf(e.key)
-    if (quickTag && idx >=0){ tagChecks.children[idx].firstElementChild.click() }
-  }
-  
-  let shortcuts = 'qwerasdfzxcvtyuighjk'.slice(0,$tags.length);
+    const idx = shortcuts.indexOf(e.key);
+    if (quickTag && idx >= 0) {
+      tagChecks.children[idx].firstElementChild.click();
+    }
+  };
+
+  let shortcuts = 'qwerasdfzxcvtyuighjk'.slice(0, $tags.length);
   let tagChecks;
-  let quickTag = false
-  
+  let quickTag = false;
+
   let start;
   let end;
   let newLabel;
@@ -24,7 +29,6 @@
       shortcuts = 'qwerasdfzxcvtyuighjk'.slice(0, $tags.length);
     }
   };
-
 </script>
 
 <div class="tagbox">

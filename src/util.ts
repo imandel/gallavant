@@ -1,30 +1,31 @@
 // https://github.com/katspaugh/wavesurfer.js/blob/master/src/util/get-id.js
 export function getId(prefix: string): string {
-    if (prefix === undefined) {
-      prefix = '_';
-    }
-    return prefix + Math.random().toString(32).substring(2);
+  if (prefix === undefined) {
+    prefix = '_';
   }
-
+  return prefix + Math.random().toString(32).substring(2);
+}
 
 export interface keyConfig {
   [index: string]: Function;
 }
 
 export function processKey(e: KeyboardEvent, config: keyConfig): void {
-  let shortcut: string = '';
-if (e.ctrlKey) {
+  let shortcut = '';
+  if (e.ctrlKey) {
     shortcut += 'ctrl+';
-}
-if (e.altKey) {
+  }
+  if (e.altKey) {
     shortcut += 'alt+';
-}
-if (e.shiftKey) {
+  }
+  if (e.shiftKey) {
     shortcut += 'shift+';
-}
-shortcut += e.code
-console.log(shortcut)
-if(config[shortcut]?.(e)){ return }
-else{ config['quicktag'](e)}
-
+  }
+  shortcut += e.code;
+  console.log(shortcut);
+  if (config[shortcut]?.(e)) {
+    return;
+  } else {
+    config['quicktag'](e);
+  }
 }

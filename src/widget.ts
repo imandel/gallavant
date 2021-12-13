@@ -10,7 +10,7 @@ import { setStoreModels, destroyModelStores } from './stores';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
-import Widget from './Widget.svelte'
+import Widget from './Widget.svelte';
 
 export class MapView extends DOMWidgetModel {
   defaults() {
@@ -83,7 +83,7 @@ export class ViewMap extends DOMWidgetView {
     });
   }
   remove() {
-    console.log('remove')
+    console.log('remove');
     destroyModelStores();
   }
 }

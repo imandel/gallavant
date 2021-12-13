@@ -35,35 +35,53 @@
   let volume = 1;
   let widget: HTMLElement;
   let topRow: HTMLElement;
-  let videoElement: HTMLVideoElement; 
+  let videoElement: HTMLVideoElement;
   let height: string;
   let map: boolean = false;
   let wavesurfercontroller: SvelteComponent;
   let tagbox: SvelteComponent;
 
   const config: keyConfig = {
-  'ctrl+KeyQ': (e: KeyboardEvent) => tagbox.toggleQuickTag(),
-  'ctrl+KeyS': (e: KeyboardEvent) => wavesurfercontroller.tagAction('save'),
-  'ctrl+Backspace': (e: KeyboardEvent) => wavesurfercontroller.tagAction('delete'),
-  'ctrl+KeyH': (e: KeyboardEvent) => wavesurfercontroller.toggleHideSaved(), 
-  'shift+Tab': (e: KeyboardEvent) => { e.preventDefault(); wavesurfercontroller.selectNextTag('reverse'); return true }, 
-  'Tab': (e: KeyboardEvent) => {  e.preventDefault(); wavesurfercontroller.selectNextTag('forward'); return true }, 
-  'shift+ArrowLeft': (e: KeyboardEvent) => { $timingObject.updatePos(-10); return true },
-  'shift+ArrowRight': (e: KeyboardEvent) => { $timingObject.updatePos(10); return true },
-  'shift+Space': (e: KeyboardEvent) => {  e.preventDefault(); $timingObject.togglePlay(); return true },
-  'quicktag' : (e: KeyboardEvent) => tagbox.quickTagAction(e)
-  // "quicktag": (e: KeyboardEvent) => {
-  //   const idx = tagbox.shortcuts.indexOf(e.key)
-  //   if (tagbox.quickTag && idx >=0){ tagbox.tagChecks.children[idx].firstElementChild.click() }
-  // }
-}
+    'ctrl+KeyQ': (e: KeyboardEvent) => tagbox.toggleQuickTag(),
+    'ctrl+KeyS': (e: KeyboardEvent) => wavesurfercontroller.tagAction('save'),
+    'ctrl+Backspace': (e: KeyboardEvent) =>
+      wavesurfercontroller.tagAction('delete'),
+    'ctrl+KeyH': (e: KeyboardEvent) => wavesurfercontroller.toggleHideSaved(),
+    'shift+Tab': (e: KeyboardEvent) => {
+      e.preventDefault();
+      wavesurfercontroller.selectNextTag('reverse');
+      return true;
+    },
+    Tab: (e: KeyboardEvent) => {
+      e.preventDefault();
+      wavesurfercontroller.selectNextTag('forward');
+      return true;
+    },
+    'shift+ArrowLeft': (e: KeyboardEvent) => {
+      $timingObject.updatePos(-10);
+      return true;
+    },
+    'shift+ArrowRight': (e: KeyboardEvent) => {
+      $timingObject.updatePos(10);
+      return true;
+    },
+    'shift+Space': (e: KeyboardEvent) => {
+      e.preventDefault();
+      $timingObject.togglePlay();
+      return true;
+    },
+    quicktag: (e: KeyboardEvent) => tagbox.quickTagAction(e),
+    // "quicktag": (e: KeyboardEvent) => {
+    //   const idx = tagbox.shortcuts.indexOf(e.key)
+    //   if (tagbox.quickTag && idx >=0){ tagbox.tagChecks.children[idx].firstElementChild.click() }
+    // }
+  };
 
-// TODO: move this functionality into custom store
+  // TODO: move this functionality into custom store
   const updateTiming = () => {
     ({ velocity, position } = $timingObject.query());
     requestAnimationFrame(updateTiming);
   };
-
 
   onMount(() => {
     widget.onkeydown = (e) => processKey(e, config);
@@ -80,6 +98,7 @@
     topRow.style.height = `${height}px`;
   }
 </script>
+
 <div class="widget" bind:this={widget} tabindex="-1">
   <div class="container" bind:this={topRow}>
     <MainVid
