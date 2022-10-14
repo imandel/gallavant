@@ -49,7 +49,6 @@
 
   let previousRegion;
   let mouseover = false;
-
   let actionState = false;
   let onHidesaveChanged = (hideSaved) => {
     if (wavesurfer?.regions?.list) {
@@ -240,10 +239,11 @@
   };
 
   onMount(async () => {
+      console.log('helloooo01')
     curKeypoint.resetKeypoint();
     activeRegion = null;
     wavesurfer = null;
-    wavesurfer = WaveSurfer.create({
+    window.wavesurfer = wavesurfer = WaveSurfer.create({
       container: waveform,
       waveColor: '#bab5ff',
       progressColor: '#1e429f',

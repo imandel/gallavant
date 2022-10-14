@@ -58,6 +58,7 @@ class MapView(DOMWidget):
     views = List([]).tag(sync=True)
     author = Unicode("").tag(sync=True)
     review = List([]).tag(sync=True)
+    plots = Unicode("").tag(sync=True)
     _keypoints = List([]).tag(sync=True)
 
     @observe("_keypoints")
@@ -98,6 +99,7 @@ class MapView(DOMWidget):
         update_callback=None,
         autosave=False,
         review=None,
+        plots=None,
         *args,
         **kwargs,
     ):
@@ -139,6 +141,7 @@ class MapView(DOMWidget):
         self.update_callback = update_callback
         self.args = args
         self.kwargs = kwargs
+        self.plots = plots
         self.df = pd.DataFrame(
             columns=["id", "start", "end", "type", "value", "author", "src"]
         )

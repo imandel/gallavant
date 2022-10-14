@@ -2,7 +2,7 @@
   import { timingObject, curKeypoint, keypoints, review } from './stores';
   import { createEventDispatcher } from 'svelte';
   //formatting ideas taken from https://adamlynch.com/flexible-data-tables-with-css-grid/
-
+  // TODO dynamically format table cols css
   const dispatch = createEventDispatcher();
 
   let rows = {};
@@ -53,7 +53,6 @@
         <th>start</th>
         <th>end</th>
         <th>tags</th>
-        <th>comments</th>
       </tr>
     </thead>
     <tbody>
@@ -74,7 +73,7 @@
           <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
-            class:even={index % 2 === 0}>{row.id}}</td
+            class:even={index % 2 === 0}>{row.id}</td
           >
           <td
             class:hover-idx={hoverIdx === index}
@@ -100,11 +99,6 @@
               <span> {tag + ''} </span>
             {/each}
           </td>
-          <td
-            class:hover-idx={hoverIdx === index}
-            class:active={row.id === $curKeypoint.id}
-            class:even={index % 2 === 0}>{row.comments}</td
-          >
         </tr>
       {/each}
     </tbody>
@@ -122,7 +116,7 @@
     display: grid;
     border-collapse: collapse;
     min-width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 3fr 4fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
   }
 
   thead,
