@@ -201,7 +201,10 @@ class MapView(DOMWidget):
                     self.review = pandas_validator(pd.read_json(review_path)).to_dict(
                         orient="records"
                     )
+        if plots is not None:
+            # TODO if altair chart return spec, if array of altair charts return  array of spec
 
+            pass
     def update_dataframe(self, new_df):
         self.df = pandas_validator(new_df)
         self._keypoints = self.df.to_dict(orient="records")

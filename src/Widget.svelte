@@ -11,7 +11,7 @@
   import Tagbox from './Tagbox.svelte';
   import Plots from './Plots.svelte';
   import { processKey, keyConfig } from './util';
-  console.log('beepbeee2p')
+
   // get model for backend comms
   // https://www.grizzly-hills.com/2020/08/05/jupyter-widgets-sending-custom-event-to-frontend-from-backend/
   export let model: DOMWidgetModel;

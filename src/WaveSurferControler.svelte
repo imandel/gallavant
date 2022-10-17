@@ -239,7 +239,7 @@
   };
 
   onMount(async () => {
-      console.log('helloooo01')
+      // console.log('helloooo01')
     curKeypoint.resetKeypoint();
     activeRegion = null;
     wavesurfer = null;
