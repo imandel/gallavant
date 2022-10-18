@@ -83,6 +83,7 @@
       previousRegion = activeRegion;
     }
   }
+
   export const vidLoaded = () => {
     if ($peaksSrc) {
       console.log('peaks', $peaksSrc);
@@ -252,7 +253,7 @@
       responsive: true,
       normalize: true,
       backend: 'MediaElement',
-      partialRender: true,
+      partialRender: false,
       zoomDebounce: 100,
       // hideScrollbar: true,
       plugins: [

@@ -1,18 +1,6 @@
 <script>
 import {plots} from './stores';
-import embed from 'vega-embed';
-// import {onMount}from 'svelte'
-// console.log($plots)
-
-// const spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-8644466b8b25777df0ba70fce8037eac"}, "mark": {"type": "line", "point": false}, "encoding": {"x": {"field": "index", "type": "quantitative"}, "y": {"field": "Ego_speed", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json", "datasets": {"data-8644466b8b25777df0ba70fce8037eac": [{"index": 15510, "Ego_speed": 81}, {"index": 15511, "Ego_speed": 81}, {"index": 15512, "Ego_speed": 81}, {"index": 15513, "Ego_speed": 81}, {"index": 15514, "Ego_speed": 81}, {"index": 15515, "Ego_speed": 81}, {"index": 15516, "Ego_speed": 82}, {"index": 15517, "Ego_speed": 82}, {"index": 15518, "Ego_speed": 82}, {"index": 15519, "Ego_speed": 82}, {"index": 15520, "Ego_speed": 82}, {"index": 15521, "Ego_speed": 81}, {"index": 15522, "Ego_speed": 81}, {"index": 15523, "Ego_speed": 81}, {"index": 15524, "Ego_speed": 81}, {"index": 15525, "Ego_speed": 81}, {"index": 15526, "Ego_speed": 81}, {"index": 15527, "Ego_speed": 81}, {"index": 15528, "Ego_speed": 81}, {"index": 15529, "Ego_speed": 81}, {"index": 15530, "Ego_speed": 81}, {"index": 15531, "Ego_speed": 81}, {"index": 15532, "Ego_speed": 81}, {"index": 15533, "Ego_speed": 81}, {"index": 15534, "Ego_speed": 81}, {"index": 15535, "Ego_speed": 79}, {"index": 15536, "Ego_speed": 79}, {"index": 15537, "Ego_speed": 79}, {"index": 15538, "Ego_speed": 79}, {"index": 15539, "Ego_speed": 79}, {"index": 15540, "Ego_speed": 81}, {"index": 15541, "Ego_speed": 81}, {"index": 15542, "Ego_speed": 81}, {"index": 15543, "Ego_speed": 81}, {"index": 15544, "Ego_speed": 81}, {"index": 15545, "Ego_speed": 81}, {"index": 15546, "Ego_speed": 81}, {"index": 15547, "Ego_speed": 81}, {"index": 15548, "Ego_speed": 81}, {"index": 15549, "Ego_speed": 81}, {"index": 15550, "Ego_speed": 82}, {"index": 15551, "Ego_speed": 82}, {"index": 15552, "Ego_speed": 82}, {"index": 15553, "Ego_speed": 82}, {"index": 15554, "Ego_speed": 82}, {"index": 15555, "Ego_speed": 82}, {"index": 15556, "Ego_speed": 82}, {"index": 15557, "Ego_speed": 82}, {"index": 15558, "Ego_speed": 82}, {"index": 15559, "Ego_speed": 82}, {"index": 15560, "Ego_speed": 84}, {"index": 15561, "Ego_speed": 84}, {"index": 15562, "Ego_speed": 84}, {"index": 15563, "Ego_speed": 84}, {"index": 15564, "Ego_speed": 86}, {"index": 15565, "Ego_speed": 86}, {"index": 15566, "Ego_speed": 86}, {"index": 15567, "Ego_speed": 86}, {"index": 15568, "Ego_speed": 86}, {"index": 15569, "Ego_speed": 89}, {"index": 15570, "Ego_speed": 89}, {"index": 15571, "Ego_speed": 89}, {"index": 15572, "Ego_speed": 89}, {"index": 15573, "Ego_speed": 89}, {"index": 15574, "Ego_speed": 89}, {"index": 15575, "Ego_speed": 89}, {"index": 15576, "Ego_speed": 89}, {"index": 15577, "Ego_speed": 89}, {"index": 15578, "Ego_speed": 89}, {"index": 15579, "Ego_speed": 89}, {"index": 15580, "Ego_speed": 89}, {"index": 15581, "Ego_speed": 89}, {"index": 15582, "Ego_speed": 89}, {"index": 15583, "Ego_speed": 92}, {"index": 15584, "Ego_speed": 92}, {"index": 15585, "Ego_speed": 92}, {"index": 15586, "Ego_speed": 92}, {"index": 15587, "Ego_speed": 92}, {"index": 15588, "Ego_speed": 92}, {"index": 15589, "Ego_speed": 92}, {"index": 15590, "Ego_speed": 92}, {"index": 15591, "Ego_speed": 92}, {"index": 15592, "Ego_speed": 92}, {"index": 15593, "Ego_speed": 92}, {"index": 15594, "Ego_speed": 92}, {"index": 15595, "Ego_speed": 92}, {"index": 15596, "Ego_speed": 92}, {"index": 15597, "Ego_speed": 92}, {"index": 15598, "Ego_speed": 93}, {"index": 15599, "Ego_speed": 93}, {"index": 15600, "Ego_speed": 93}, {"index": 15601, "Ego_speed": 93}, {"index": 15602, "Ego_speed": 93}, {"index": 15603, "Ego_speed": 95}, {"index": 15604, "Ego_speed": 95}, {"index": 15605, "Ego_speed": 95}, {"index": 15606, "Ego_speed": 95}, {"index": 15607, "Ego_speed": 95}, {"index": 15608, "Ego_speed": 93}, {"index": 15609, "Ego_speed": 93}]}};
-// const embedOpt = {"mode": "vega-lite"};
-
-// onMount(async()=>{
-//   const result = await ("#vis", spec, embedOpt)
-//   console.log('VEGA', result)
-// })
 import { VegaLite } from "svelte-vega";
-// import type { VisualizationSpec } from "svelte-vega";
 
   const data = {
     "data-8644466b8b25777df0ba70fce8037eac": [
@@ -20648,25 +20636,4 @@ import { VegaLite } from "svelte-vega";
 </script>
 
 <div class='dummy'>{$plots}</div>
-<div id="vis">hi ilan</div>
 <VegaLite {data} {spec} />
-<!--<style>-->
-<!--.dummy{-->
-<!--height:300px;-->
-<!--width: 300px;-->
-<!--background-color: red;-->
-<!--}-->
-<!--</style>-->
-
-
-
-<!--  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>-->
-<!--  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@5.2.0"></script>-->
-<!--  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>-->
-
-
-  <style>
-    .error {
-        color: red;
-    }
-  </style>
