@@ -23,12 +23,13 @@
     return keypointsArray.reduce((acc, keypoint) => {
       const key = keypoint.id;
       if (!acc[keypoint.id]) {
-        const { start, end, id, author, src } = keypoint;
+        // const { start, end, id, author, src } = keypoint;
+        const { start, end, id, src } = keypoint;
         acc[keypoint.id] = {
           start,
           end,
           id,
-          author,
+          // author,
           src,
           tags: [],
           comments: '',
@@ -49,7 +50,7 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>author</th>
+<!--        <th>author</th>-->
         <th>start</th>
         <th>end</th>
         <th>tags</th>
@@ -75,11 +76,11 @@
             class:active={row.id === $curKeypoint.id}
             class:even={index % 2 === 0}>{row.id}</td
           >
-          <td
-            class:hover-idx={hoverIdx === index}
-            class:active={row.id === $curKeypoint.id}
-            class:even={index % 2 === 0}>{row.author}</td
-          >
+<!--          <td-->
+<!--            class:hover-idx={hoverIdx === index}-->
+<!--            class:active={row.id === $curKeypoint.id}-->
+<!--            class:even={index % 2 === 0}>{row.author}</td-->
+<!--          >-->
           <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
@@ -116,7 +117,9 @@
     display: grid;
     border-collapse: collapse;
     min-width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+    /*grid-template-columns: 1fr 1fr 1fr 1fr 3fr;*/
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+
   }
 
   thead,
