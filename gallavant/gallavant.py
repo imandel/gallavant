@@ -207,9 +207,6 @@ class MapView(DOMWidget):
         if plots is not None:
             # TODO if altair chart return spec, if array of altair charts return  array of spec
             self.plots = plots
-            clean_spec = plots.to_dict()
-            del clean_spec['datasets']
-            clean_spec['data']['name'] = 'curData'
 
 
     def update_dataframe(self, new_df):
