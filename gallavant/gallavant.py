@@ -9,7 +9,7 @@ TODO: Add module docstring
 """
 
 from ipywidgets import DOMWidget
-from traitlets import Integer, Unicode, Float, List, observe
+from traitlets import Integer, Unicode, Float, List, observe, Dict
 from ._frontend import module_name, module_version
 from pathlib import Path
 import pandas as pd
@@ -60,7 +60,7 @@ class MapView(DOMWidget):
     views = List([]).tag(sync=True)
     # author = Unicode("").tag(sync=True)
     review = List([]).tag(sync=True)
-    plots = Unicode("").tag(sync=True)
+    plots = Dict({}).tag(sync=True)
     _keypoints = List([]).tag(sync=True)
 
     @observe("_keypoints")
