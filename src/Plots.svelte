@@ -1,7 +1,6 @@
 <script>
 import {plots} from './stores';
 import { VegaLite } from "svelte-vega";
-
   const data = {
     "data-8644466b8b25777df0ba70fce8037eac": [
       {
@@ -20635,5 +20634,5 @@ import { VegaLite } from "svelte-vega";
 }
 </script>
 
-<div class='dummy'>{$plots}</div>
+<!-- <div class='dummy'>{$plots}</div> -->
 <VegaLite {data} {spec} />
