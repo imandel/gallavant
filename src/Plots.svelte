@@ -20606,6 +20606,7 @@ import { VegaLite } from "svelte-vega";
     ],
   };
 
+  console.log('plots', plots)
   const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.2.0.json",
   "config": {
