@@ -377,6 +377,7 @@
     $curKeypoint.start = region.start;
     $curKeypoint.end = region.end;
     $curKeypoint.id = region.id;
+    sendBackendMsg('keypoint_clicked',{start: region.start, end: region.end})
     if (region.data) {
       $curKeypoint.tags = region.data.tags || [];
 

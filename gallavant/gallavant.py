@@ -8,8 +8,9 @@
 TODO: Add module docstring
 """
 
+from os import sync
 from ipywidgets import DOMWidget
-from traitlets import Integer, Unicode, Float, List, observe
+from traitlets import Integer, Unicode, Float, List, Dict, observe
 from ._frontend import module_name, module_version
 from pathlib import Path
 import pandas as pd
@@ -60,6 +61,7 @@ class MapView(DOMWidget):
     review = List([]).tag(sync=True)
     plots = Unicode("").tag(sync=True)
     _keypoints = List([]).tag(sync=True)
+    _curplot = List([]).tag(sync=True)
 
     @observe("_keypoints")
     def _observe_keypoints(self, change):
@@ -81,6 +83,11 @@ class MapView(DOMWidget):
             out_path = Path(self.src).with_suffix(".peaks.json")
             with open(out_path, "w") as of:
                 json.dump(content["value"], of)
+        elif content["event"] == "keypoint_clicked":
+            self._curplot = self.dataset[(self.dataset['Video_time']>content["value"]['start']) & (self.dataset['Video_time']<content["value"]['end'])].to_dict(orient='records')
+             #content["value"]['start']
+            #  self.dataset[self.dataset[(self.dataset['Video_time']>= 
+            # ) & (self.dataset['Video_time']<= content["value"]['end'])]].to_dict()
 
     def __init__(
         self,
@@ -100,9 +107,11 @@ class MapView(DOMWidget):
         autosave=False,
         review=None,
         plots=None,
+        dataset=None,
         *args,
         **kwargs,
     ):
+        self._curplot=[]
         if peaks is not None:
             # store peaks or filename?
             self.peaks = peaks
@@ -142,6 +151,7 @@ class MapView(DOMWidget):
         self.args = args
         self.kwargs = kwargs
         self.plots = plots
+        self.dataset = dataset
         self.df = pd.DataFrame(
             columns=["id", "start", "end", "type", "value", "author", "src"]
         )
@@ -203,8 +213,12 @@ class MapView(DOMWidget):
                     )
         if plots is not None:
             # TODO if altair chart return spec, if array of altair charts return  array of spec
-
             pass
+
+        if dataset is not None:
+            # TODO validate for video_time column?
+            self.data=dataset
+            
     def update_dataframe(self, new_df):
         self.df = pandas_validator(new_df)
         self._keypoints = self.df.to_dict(orient="records")

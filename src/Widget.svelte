@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cueData, gps, views, timingObject } from './stores';
+  import { cueData, gps, views, timingObject, curKeypoint } from './stores';
   import type { DOMWidgetModel } from '@jupyter-widgets/base';
   import { onMount, SvelteComponent } from 'svelte';
   import Map from './Map.svelte';
@@ -8,10 +8,10 @@
   import Views from './Views.svelte';
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
-  // import Tagbox from './Tagbox.svelte';
-  import Plots from './Plots.svelte';
+  import Tagbox from './Tagbox.svelte';
+  // import Plots from './Plots.svelte';
   import { processKey } from './util';
-  import type { keyConfig } from './util'
+  import type { keyConfig } from './util';
 
   // get model for backend comms
   // https://www.grizzly-hills.com/2020/08/05/jupyter-widgets-sending-custom-event-to-frontend-from-backend/
@@ -42,10 +42,10 @@
   let height: string;
   let map: boolean = false;
   let wavesurfercontroller: SvelteComponent;
-  // let tagbox: SvelteComponent;
+  let tagbox: SvelteComponent;
 
   const config: keyConfig = {
-    // 'ctrl+KeyQ': (e: KeyboardEvent) => tagbox.toggleQuickTag(),
+    'ctrl+KeyQ': (e: KeyboardEvent) => tagbox.toggleQuickTag(),
     'ctrl+KeyS': (e: KeyboardEvent) => wavesurfercontroller.tagAction('save'),
     'ctrl+Backspace': (e: KeyboardEvent) =>
       wavesurfercontroller.tagAction('delete'),
@@ -73,11 +73,13 @@
       $timingObject.togglePlay();
       return true;
     },
-    // quicktag: (e: KeyboardEvent) => tagbox.quickTagAction(e),
-    // "quicktag": (e: KeyboardEvent) => {
-    //   const idx = tagbox.shortcuts.indexOf(e.key)
-    //   if (tagbox.quickTag && idx >=0){ tagbox.tagChecks.children[idx].firstElementChild.click() }
-    // }
+    quicktag: (e: KeyboardEvent) => tagbox.quickTagAction(e),
+    // quicktag: (e: KeyboardEvent) => {
+    //   const idx = tagbox.shortcuts.indexOf(e.key);
+    //   if (tagbox.quickTag && idx >= 0) {
+    //     tagbox.tagChecks.children[idx].firstElementChild.click();
+    //   }
+    // },
   };
 
   // TODO: move this functionality into custom store
@@ -88,7 +90,7 @@
 
   onMount(() => {
     widget.onkeydown = (e) => processKey(e, config);
-    
+
     requestAnimationFrame(updateTiming);
     model.on('msg:custom', handleBackendMsg);
     // widgets not being properly destroyed? prevents multiple maps
@@ -104,7 +106,6 @@
 
 <div class="widget" bind:this={widget} tabindex="-1">
   <div class="container" bind:this={topRow}>
-
     <!-- TODO? use <svelte:component> to make less verbose -->
     {#if $views.length}
       <Views views={$views} />
@@ -121,8 +122,6 @@
       bind:volume
       on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
     />
-
-
   </div>
 
   <WaveSurferControler
@@ -136,31 +135,30 @@
 
   <div class="bottom-row">
     <div>
-
       <DataTable
         on:activeRegionChanged={(e) =>
           wavesurfercontroller.setActiveRegion(e.detail)}
       />
     </div>
-    <Plots></Plots>
-<!--    <Tagbox bind:this={tagbox} bind:position>-->
-<!--      {#if $curKeypoint.start}-->
-<!--        <button-->
-<!--          on:click={() => {-->
-<!--            wavesurfercontroller.tagAction('delete');-->
-<!--          }}-->
-<!--        >-->
-<!--          Delete Tag-->
-<!--        </button>-->
-<!--        <button-->
-<!--          on:click={() => {-->
-<!--            wavesurfercontroller.tagAction('save');-->
-<!--          }}-->
-<!--        >-->
-<!--          Save Tag-->
-<!--        </button>-->
-<!--      {/if}-->
-<!--    </Tagbox>-->
+    <!-- <Plots /> -->
+    <Tagbox bind:this={tagbox} bind:position>
+      {#if $curKeypoint.start}
+        <button
+          on:click={() => {
+            wavesurfercontroller.tagAction('delete');
+          }}
+        >
+          Delete Tag
+        </button>
+        <button
+          on:click={() => {
+            wavesurfercontroller.tagAction('save');
+          }}
+        >
+          Save Tag
+        </button>
+      {/if}
+    </Tagbox>
   </div>
 </div>
 
