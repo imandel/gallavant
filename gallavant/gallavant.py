@@ -8,13 +8,13 @@
 TODO: Add module docstring
 """
 
-from os import sync
 from ipywidgets import DOMWidget
 from traitlets import Integer, Unicode, Float, List, Dict, observe
 from ._frontend import module_name, module_version
 from pathlib import Path
 import pandas as pd
 import json
+import altair as alt
 import time
 
 import warnings
@@ -155,7 +155,6 @@ class MapView(DOMWidget):
         self.update_callback = update_callback
         self.args = args
         self.kwargs = kwargs
-        self.plots = plots
         self.dataset = dataset
         self.df = pd.DataFrame(
             # columns=["id", "start", "end", "type", "value", "author", "src"]
@@ -218,9 +217,11 @@ class MapView(DOMWidget):
                         orient="records"
                     )
         if plots is not None:
-            # TODO if altair chart return spec, if array of altair charts return  array of spec
-            self.plots = {}#plots
-            pass
+            # TODO if altair chart return spec, if array of altair charts return array of spec
+            self.plots = plots.to_dict()
+            clean_spec = self.plots
+            del clean_spec['datasets']
+            clean_spec['data']['name'] = 'curData'
 
         if dataset is not None:
             # TODO validate for video_time column?
