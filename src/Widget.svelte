@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cueData, gps, views, timingObject, curKeypoint } from './stores';
+  import { cueData, gps, views, timingObject, curKeypoint, plots } from './stores';
   import type { DOMWidgetModel } from '@jupyter-widgets/base';
   import { onMount, SvelteComponent } from 'svelte';
   import Map from './Map.svelte';
@@ -9,7 +9,7 @@
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
   import Tagbox from './Tagbox.svelte';
-  // import Plots from './Plots.svelte';
+  import Plots from './Plots.svelte';
   import { processKey } from './util';
   import type { keyConfig } from './util';
 
@@ -106,6 +106,15 @@
 
 <div class="widget" bind:this={widget} tabindex="-1">
   <div class="container" bind:this={topRow}>
+    <MainVid
+      bind:height
+      bind:videoElement
+      bind:volume
+      on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
+    />
+    <!-- {#if $plots.length}
+    <Plots/>
+    {/if} -->
     <!-- TODO? use <svelte:component> to make less verbose -->
     {#if $views.length}
       <Views views={$views} />
@@ -116,12 +125,6 @@
     {#if map}
       <Map bind:position />
     {/if}
-    <MainVid
-      bind:height
-      bind:videoElement
-      bind:volume
-      on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
-    />
   </div>
 
   <WaveSurferControler
@@ -140,7 +143,7 @@
           wavesurfercontroller.setActiveRegion(e.detail)}
       />
     </div>
-    <!-- <Plots /> -->
+    <Plots />
     <Tagbox bind:this={tagbox} bind:position>
       {#if $curKeypoint.start}
         <button

@@ -14,8 +14,6 @@ from ._frontend import module_name, module_version
 from pathlib import Path
 import pandas as pd
 import json
-import altair as alt
-import time
 
 import warnings
 
@@ -31,7 +29,6 @@ warnings.formatwarning = custom_formatwarning
 # todo: take in df, check cols, types, tidy, and null issues. add random ID (python_alksfjao131) if not given
 def pandas_validator(df):
 
-    # cols = ["start", "end", "type", "value", "author", "src"]
     cols = ["start", "end", "type", "value", "src"]
 
     for col in cols:
@@ -192,6 +189,8 @@ class MapView(DOMWidget):
                 elif ".json" in df_path.suffix:
                     self.df = pandas_validator(pd.read_json(df_path))
             self._keypoints = self.df.to_dict(orient="records")
+            if 'tags' in self.df.columns:
+                self.tags.extend(self.df.tags.unique())
         else:
             self._keypoints = []
 
