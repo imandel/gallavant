@@ -13,6 +13,7 @@ from traitlets import Integer, Unicode, Float, List, Dict, observe
 from ._frontend import module_name, module_version
 from pathlib import Path
 import pandas as pd
+import numpy as np
 import json
 
 import warnings
@@ -190,7 +191,8 @@ class MapView(DOMWidget):
                     self.df = pandas_validator(pd.read_json(df_path))
             self._keypoints = self.df.to_dict(orient="records")
             if 'tags' in self.df.columns:
-                self.tags.extend(self.df.tags.unique())
+                unique_tags = np.unique(np.concatenate(self.df.tags))
+                print(unique_tags)
         else:
             self._keypoints = []
 
