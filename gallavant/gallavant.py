@@ -111,7 +111,7 @@ class MapView(DOMWidget):
         update_callback=None,
         autosave=False,
         review=None,
-        plots=None,
+        plots={},
         dataset=None,
         *args,
         **kwargs,
@@ -219,7 +219,7 @@ class MapView(DOMWidget):
                     )
         if plots is not None:
             # TODO if altair chart return spec, if array of altair charts return  array of spec
-            self.plots = plots
+            self.plots = {}#plots
             pass
 
         if dataset is not None:
