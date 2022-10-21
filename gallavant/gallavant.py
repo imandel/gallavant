@@ -147,13 +147,13 @@ class MapView(DOMWidget):
         self.on_msg(self._handle_custom_msg)
 
         self.src = src
-        self.tags = tags
         self.views = views
         self.save_tempfiles = save_tempfiles
         self.update_callback = update_callback
         self.args = args
         self.kwargs = kwargs
         self.dataset = dataset
+        self.tags = []
         self.df = pd.DataFrame(
             # columns=["id", "start", "end", "type", "value", "author", "src"]
             columns=["id", "start", "end", "type", "value", "src"]
@@ -192,7 +192,7 @@ class MapView(DOMWidget):
             self._keypoints = self.df.to_dict(orient="records")
             if 'tags' in self.df.columns:
                 unique_tags = np.unique(np.concatenate(self.df.tags))
-                print(unique_tags)
+                tags.extend(unique_tags.tolist())
         else:
             self._keypoints = []
 
@@ -202,6 +202,7 @@ class MapView(DOMWidget):
             #     temp_df = pd.read_json(self._out_file)
             # self.update_dataframe(temp_df)
 
+        self.tags = tags
         if review is not None:
             if isinstance(review, pd.DataFrame):
                 self.review = pandas_validator(review)

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cueData, gps, views, timingObject, curKeypoint, plots } from './stores';
+  import { cueData, gps, views, timingObject, curKeypoint } from './stores';
   import type { DOMWidgetModel } from '@jupyter-widgets/base';
   import { onMount, SvelteComponent } from 'svelte';
   import Map from './Map.svelte';
@@ -9,7 +9,7 @@
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
   import Tagbox from './Tagbox.svelte';
-  import Plots from './Plots.svelte';
+  // import Plots from './Plots.svelte';
   import { processKey } from './util';
   import type { keyConfig } from './util';
 
@@ -143,7 +143,7 @@
           wavesurfercontroller.setActiveRegion(e.detail)}
       />
     </div>
-    <Plots />
+    <!-- <Plots /> -->
     <Tagbox bind:this={tagbox} bind:position>
       {#if $curKeypoint.start}
         <button
