@@ -50,11 +50,12 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-<!--        <th>author</th>-->
+        <!-- <th>ID</th> -->
+        <!--        <th>author</th>-->
         <th>start</th>
         <th>end</th>
         <th>tags</th>
+        <th>comments</th>
       </tr>
     </thead>
     <tbody>
@@ -72,16 +73,16 @@
             activeRegionChanged(row);
           }}
         >
-          <td
+          <!-- <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
             class:even={index % 2 === 0}>{row.id}</td
-          >
-<!--          <td-->
-<!--            class:hover-idx={hoverIdx === index}-->
-<!--            class:active={row.id === $curKeypoint.id}-->
-<!--            class:even={index % 2 === 0}>{row.author}</td-->
-<!--          >-->
+          > -->
+          <!-- <td
+           class:hover-idx={hoverIdx === index}
+           class:active={row.id === $curKeypoint.id}
+           class:even={index % 2 === 0}>{row.author}</td
+         > -->
           <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
@@ -101,6 +102,11 @@
               <span> {tag + ''} </span>
             {/each}
           </td>
+          <td
+            class:hover-idx={hoverIdx === index}
+            class:active={row.id === $curKeypoint.id}
+            class:even={index % 2 === 0}>{row.comments}</td
+          >
         </tr>
       {/each}
     </tbody>
@@ -118,9 +124,8 @@
     display: grid;
     border-collapse: collapse;
     min-width: 100%;
-    /*grid-template-columns: 1fr 1fr 1fr 1fr 3fr;*/
-    grid-template-columns: 1fr 1fr 1fr 3fr;
-
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 2fr; */
+    grid-template-columns: 1fr 1fr 2fr 2fr;
   }
 
   thead,
