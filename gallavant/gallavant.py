@@ -35,7 +35,8 @@ def pandas_validator(df):
     for col in cols:
         if col not in df.columns:
             raise ValueError(f"missing {col} in dataframe columns")
-
+    if 'id' in df.columns:
+        df['id'] = df['id'].astype(str)
     return df
 
 
@@ -191,8 +192,7 @@ class MapView(DOMWidget):
                     self.df = pandas_validator(pd.read_json(df_path))
             self._keypoints = self.df.to_dict(orient="records")
             if 'tags' in self.df.columns:
-                unique_tags = np.unique(np.concatenate(self.df.tags))
-                tags.extend(unique_tags.tolist())
+                tags.extend(self.df[self.df.type == 'tag'].value.unique().tolist())
         else:
             self._keypoints = []
 
