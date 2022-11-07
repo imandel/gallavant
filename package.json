@@ -1,6 +1,6 @@
 {
   "name": "gallavant",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A Custom Jupyter Widget Library for video analysis of geospatial data",
   "keywords": [
     "jupyter",
