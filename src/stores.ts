@@ -163,7 +163,7 @@ export function setStoreModels(model: DOMWidgetModel): void {
     comments: null,
   });
   plots.setModel(model);
-  curplot.setModel(model)
+  curplot.setModel(model);
 }
 
 export function destroyModelStores(): void {
@@ -181,6 +181,6 @@ export function destroyModelStores(): void {
   tags.set([]);
   cueData.set([]);
   plots.set('');
-  curplot.set([])
+  curplot.set([]);
 }
 export const curKeypoint = createKeypoint();

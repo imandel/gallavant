@@ -1,10 +1,7 @@
 // Copyright (c) ilan
 // Distributed under the terms of the Modified BSD License.
 
-import {
-  DOMWidgetModel,
-  DOMWidgetView,
-} from '@jupyter-widgets/base';
+import { DOMWidgetModel, DOMWidgetView } from '@jupyter-widgets/base';
 import type { ISerializers } from '@jupyter-widgets/base';
 import { setStoreModels, destroyModelStores } from './stores';
 
