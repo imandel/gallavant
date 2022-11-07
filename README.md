@@ -62,14 +62,15 @@ pip install -e .
 ```
 
 When developing your extensions, you need to manually enable your extensions with the
-notebook / lab frontend. For lab, this is done by the command:
-
+notebook frontend. 
+<!-- For lab, this is done by the command: -->
+<!-- 
 ```
 jupyter labextension develop --overwrite .
 yarn run build
-```
+``` -->
 
-For classic notebook, you need to run:
+You need to run:
 
 ```
 jupyter nbextension install --sys-prefix --symlink --overwrite --py gallavant
@@ -89,7 +90,7 @@ For Jupyter Notebook you can just watch for JS changes:
 yarn watch
 ```
 
-#### Jupyter Lab:
+<!-- #### Jupyter Lab:
 If you use JupyterLab to develop then you can watch the source directory and run JupyterLab at the same time in different
 terminals to watch for changes in the extension's source and automatically rebuild the widget.
 
@@ -102,7 +103,7 @@ jupyter labextension watch
 jupyter lab
 ```
 
-After a change wait for the build to finish and then refresh your browser and the changes should take effect.
+After a change wait for the build to finish and then refresh your browser and the changes should take effect. -->
 
 #### Python:
 If you make a change to the python code then you will need to restart the notebook kernel to have it take effect.
