@@ -7,7 +7,7 @@ export function getId(prefix: string): string {
 }
 
 export interface keyConfig {
-  [index: string]: (e: KeyboardEvent)=>void;
+  [index: string]: (e: KeyboardEvent) => Boolean;
 }
 
 export function processKey(e: KeyboardEvent, config: keyConfig): void {
