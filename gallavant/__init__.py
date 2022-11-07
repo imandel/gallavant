@@ -4,7 +4,6 @@
 # Copyright (c) ilan.
 # Distributed under the terms of the Modified BSD License.
 
-from .example import ExampleWidget
 from .gallavant import MapView
 from ._version import __version__, version_info
 
