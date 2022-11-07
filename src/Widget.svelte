@@ -9,7 +9,10 @@
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
   import Tagbox from './Tagbox.svelte';
-  import { processKey, keyConfig } from './util';
+  import Plots from './Plots.svelte';
+  import { processKey } from './util';
+  import type { keyConfig } from './util';
+
   // get model for backend comms
   // https://www.grizzly-hills.com/2020/08/05/jupyter-widgets-sending-custom-event-to-frontend-from-backend/
   export let model: DOMWidgetModel;
@@ -71,10 +74,12 @@
       return true;
     },
     quicktag: (e: KeyboardEvent) => tagbox.quickTagAction(e),
-    // "quicktag": (e: KeyboardEvent) => {
-    //   const idx = tagbox.shortcuts.indexOf(e.key)
-    //   if (tagbox.quickTag && idx >=0){ tagbox.tagChecks.children[idx].firstElementChild.click() }
-    // }
+    // quicktag: (e: KeyboardEvent) => {
+    //   const idx = tagbox.shortcuts.indexOf(e.key);
+    //   if (tagbox.quickTag && idx >= 0) {
+    //     tagbox.tagChecks.children[idx].firstElementChild.click();
+    //   }
+    // },
   };
 
   // TODO: move this functionality into custom store
@@ -85,7 +90,7 @@
 
   onMount(() => {
     widget.onkeydown = (e) => processKey(e, config);
-    //
+
     requestAnimationFrame(updateTiming);
     model.on('msg:custom', handleBackendMsg);
     // widgets not being properly destroyed? prevents multiple maps
@@ -107,6 +112,8 @@
       bind:volume
       on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
     />
+    <Plots bind:position />
+
     <!-- TODO? use <svelte:component> to make less verbose -->
     {#if $views.length}
       <Views views={$views} />

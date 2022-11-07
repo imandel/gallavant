@@ -49,7 +49,6 @@
 
   let previousRegion;
   let mouseover = false;
-
   let actionState = false;
   let onHidesaveChanged = (hideSaved) => {
     if (wavesurfer?.regions?.list) {
@@ -84,6 +83,7 @@
       previousRegion = activeRegion;
     }
   }
+
   export const vidLoaded = () => {
     if ($peaksSrc) {
       console.log('peaks', $peaksSrc);
@@ -240,10 +240,11 @@
   };
 
   onMount(async () => {
+      // console.log('helloooo01')
     curKeypoint.resetKeypoint();
     activeRegion = null;
     wavesurfer = null;
-    wavesurfer = WaveSurfer.create({
+    window.wavesurfer = wavesurfer = WaveSurfer.create({
       container: waveform,
       waveColor: '#bab5ff',
       progressColor: '#1e429f',
@@ -252,7 +253,7 @@
       responsive: true,
       normalize: true,
       backend: 'MediaElement',
-      partialRender: true,
+      partialRender: false,
       zoomDebounce: 100,
       // hideScrollbar: true,
       plugins: [
@@ -376,6 +377,7 @@
     $curKeypoint.start = region.start;
     $curKeypoint.end = region.end;
     $curKeypoint.id = region.id;
+    sendBackendMsg('keypoint_clicked',{start: region.start, end: region.end})
     if (region.data) {
       $curKeypoint.tags = region.data.tags || [];
 

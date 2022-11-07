@@ -2,7 +2,7 @@
   import { timingObject, curKeypoint, keypoints, review } from './stores';
   import { createEventDispatcher } from 'svelte';
   //formatting ideas taken from https://adamlynch.com/flexible-data-tables-with-css-grid/
-
+  // TODO dynamically format table cols css
   const dispatch = createEventDispatcher();
 
   let rows = {};
@@ -23,12 +23,13 @@
     return keypointsArray.reduce((acc, keypoint) => {
       const key = keypoint.id;
       if (!acc[keypoint.id]) {
-        const { start, end, id, author, src } = keypoint;
+        // const { start, end, id, author, src } = keypoint;
+        const { start, end, id, src } = keypoint;
         acc[keypoint.id] = {
           start,
           end,
           id,
-          author,
+          // author,
           src,
           tags: [],
           comments: '',
@@ -44,12 +45,13 @@
   };
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="container" on:click>
   <table>
     <thead>
       <tr>
-        <th>ID</th>
-        <th>author</th>
+        <!-- <th>ID</th> -->
+        <!--        <th>author</th>-->
         <th>start</th>
         <th>end</th>
         <th>tags</th>
@@ -71,16 +73,16 @@
             activeRegionChanged(row);
           }}
         >
-          <td
+          <!-- <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
-            class:even={index % 2 === 0}>{row.id}}</td
-          >
-          <td
-            class:hover-idx={hoverIdx === index}
-            class:active={row.id === $curKeypoint.id}
-            class:even={index % 2 === 0}>{row.author}</td
-          >
+            class:even={index % 2 === 0}>{row.id}</td
+          > -->
+          <!-- <td
+           class:hover-idx={hoverIdx === index}
+           class:active={row.id === $curKeypoint.id}
+           class:even={index % 2 === 0}>{row.author}</td
+         > -->
           <td
             class:hover-idx={hoverIdx === index}
             class:active={row.id === $curKeypoint.id}
@@ -122,7 +124,8 @@
     display: grid;
     border-collapse: collapse;
     min-width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 3fr 4fr;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 2fr; */
+    grid-template-columns: 1fr 1fr 2fr 2fr;
   }
 
   thead,

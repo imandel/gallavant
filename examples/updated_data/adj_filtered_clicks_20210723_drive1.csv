@@ -1,0 +1,12 @@
+Event,Time,Deltatime_between_clicks_secs,drive,clicks,Aware of Intent,Trigger,Cue Type,outlook
+13,0:13:54,23,A,3,TRUE,cue,cue,positive
+13,0:13:54,23,A,4,TRUE,cue,cue,positive
+14,0:14:42,48,A,5,FALSE,cue,cue,negative
+15,0:16:00,28,A,6,FALSE,cue,cue,negative
+15,0:16:00,28,A,8,FALSE,car,car,negative
+15,0:16:00,28,A,9,FALSE,car,car,negative
+16,0:16:59,59,A,10,TRUE,car,car,positive
+17,0:18:44,45,A,12,FALSE,oru,car,negative
+18,0:19:31,47,A,13,FALSE,car,car,Neutral
+19,0:20:23,52,A,14,FALSE,oru,car,negative
+20,0:20:49,26,A,15,FALSE,oru,car,Neutral

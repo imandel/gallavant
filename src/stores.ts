@@ -136,6 +136,8 @@ export const author = WidgetWritable<string>('author', '');
 export const keypoints = WidgetWritable<Array<string>>('_keypoints', []);
 export const review = WidgetWritable<Array<string>>('review', []);
 export const tags = WidgetWritable<Array<string>>('tags', []);
+export const plots = WidgetWritable<string>('plots', '');
+export const curplot = WidgetWritable<Array<string>>('_curplot', []);
 
 // Set the model for each store you create.
 export function setStoreModels(model: DOMWidgetModel): void {
@@ -160,6 +162,8 @@ export function setStoreModels(model: DOMWidgetModel): void {
     tags: [],
     comments: null,
   });
+  plots.setModel(model);
+  curplot.setModel(model);
 }
 
 export function destroyModelStores(): void {
@@ -176,5 +180,7 @@ export function destroyModelStores(): void {
   review.set([]);
   tags.set([]);
   cueData.set([]);
+  plots.set('');
+  curplot.set([]);
 }
 export const curKeypoint = createKeypoint();

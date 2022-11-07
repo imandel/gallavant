@@ -147,7 +147,7 @@
       mapRef = new mapboxgl.Map({
         container,
         style: 'mapbox://styles/mapbox/light-v10?optimize=true',
-        center: [-74.0059413, 40.7127837],
+        center: [153.0234991, -27.4689682],
         zoom: 13,
       });
       mapRef.on('load', () => {

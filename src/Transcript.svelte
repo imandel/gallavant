@@ -99,6 +99,7 @@
 
 </style>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="bar" on:click={()=>{hidden=!hidden}}></div>
 <div class='transcript-container'
 	 bind:this={transcriptBox}
@@ -110,6 +111,7 @@
 
 	 
 	 {#each $cueData as cue, index}
+	 <!-- svelte-ignore a11y-click-events-have-key-events -->
 	 <p class:activeLine={index===currentCue}
 	 	class:highlighted = {highlights.includes(index)}
 	 	on:click ={()=>{$timingObject.update({position:cue.startTime})}}
