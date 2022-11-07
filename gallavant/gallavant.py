@@ -8,6 +8,7 @@
 TODO: Add module docstring
 """
 
+from re import L
 from ipywidgets import DOMWidget
 from traitlets import Integer, Unicode, Float, List, Dict, observe
 from ._frontend import module_name, module_version
@@ -35,8 +36,8 @@ def pandas_validator(df):
     for col in cols:
         if col not in df.columns:
             raise ValueError(f"missing {col} in dataframe columns")
-    if 'id' in df.columns:
-        df['id'] = df['id'].astype(str)
+    if "id" in df.columns:
+        df["id"] = df["id"].astype(str)
     return df
 
 
@@ -62,7 +63,7 @@ class MapView(DOMWidget):
     review = List([]).tag(sync=True)
     plots = Dict({}).tag(sync=True)
     _keypoints = List([]).tag(sync=True)
-    _curplot = List([]).tag(sync=True)
+    _curplot = Dict({}).tag(sync=True)
 
     @observe("_keypoints")
     def _observe_keypoints(self, change):
@@ -85,10 +86,12 @@ class MapView(DOMWidget):
             with open(out_path, "w") as of:
                 json.dump(content["value"], of)
         elif content["event"] == "keypoint_clicked":
-            self._curplot = self.dataset[
-                (self.dataset["Video_time"] > content["value"]["start"])
-                & (self.dataset["Video_time"] < content["value"]["end"])
-            ].to_dict(orient="records")
+            self._curplot = {
+                "curData": self.dataset[
+                    (self.dataset["Video_time"] > content["value"]["start"])
+                    & (self.dataset["Video_time"] < content["value"]["end"])
+                ].to_dict(orient="records")
+            }
             # content["value"]['start']
             #  self.dataset[self.dataset[(self.dataset['Video_time']>=
             # ) & (self.dataset['Video_time']<= content["value"]['end'])]].to_dict()
@@ -115,7 +118,7 @@ class MapView(DOMWidget):
         *args,
         **kwargs,
     ):
-        self._curplot = []
+        self._curplot = {}
         if peaks is not None:
             # store peaks or filename?
             self.peaks = peaks
@@ -191,8 +194,8 @@ class MapView(DOMWidget):
                 elif ".json" in df_path.suffix:
                     self.df = pandas_validator(pd.read_json(df_path))
             self._keypoints = self.df.to_dict(orient="records")
-            if 'tags' in self.df.columns:
-                tags.extend(self.df[self.df.type == 'tag'].value.unique().tolist())
+            if "tags" in self.df.columns:
+                tags.extend(self.df[self.df.type == "tag"].value.unique().tolist())
         else:
             self._keypoints = []
 
@@ -220,10 +223,9 @@ class MapView(DOMWidget):
                     )
         if plots is not None:
             # TODO if altair chart return spec, if array of altair charts return array of spec
-            self.plots = plots.to_dict()
-            clean_spec = self.plots
-            del clean_spec['datasets']
-            clean_spec['data']['name'] = 'curData'
+            clean_spec = plots.to_dict()
+            del clean_spec["datasets"]
+            self.plots = clean_spec
 
         if dataset is not None:
             # TODO validate for video_time column?

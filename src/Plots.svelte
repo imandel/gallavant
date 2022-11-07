@@ -1,43 +1,95 @@
 <script>
   import { plots, curplot } from './stores';
   import { VegaLite } from 'svelte-vega';
-  $: data = { table: $curplot };
-  const spec = {
-    $schema: 'https://vega.github.io/schema/vega-lite/v5.2.0.json',
-    config: {
-      view: {
-        continuousHeight: 300,
-        continuousWidth: 400,
-      },
-    },
-    data: {
-      name: 'table',
-    },
-    layer: [
-      {
-        encoding: {
-          x: {
-            field: 'Video_time',
-            type: 'quantitative',
-          },
-          y: {
-            field: 'Ego_speed',
-            type: 'quantitative',
-          },
+  export let position;
+  const { config, encoding, layer, mark } = $plots;
+  let spec;
+  let hidden = false;
+  let view;
+  let height;
+  $: upd(position);
+  $: {
+    spec = {
+      config: { ...config, autosize: 'fit' },
+      data: { name: 'curData' },
+      height: height - 20,
+      mark,
+      encoding: { x: encoding.x },
+      $schema: 'https://vega.github.io/schema/vega-lite/v4.17.0.json',
+      layer: [
+        {
+          mark,
+          encoding,
         },
-        mark: {
-          point: false,
-          type: 'line',
+        {
+          params: [
+            {
+              name: 'ts',
+              value: 0,
+              select: {
+                type: 'point',
+                encodings: ['x'],
+                on: 'click',
+                nearest: true,
+              },
+            },
+          ],
+          mark: { type: 'rule' },
+          encoding: { opacity: { value: 0 } },
         },
-      },
-      {
-        mark: { type: 'rule' },
-        encoding: {
-          "x": {"field": "Video_time", "aggregate": "mean"},
+        {
+          transform: [{ filter: { and: ['ts', { param: 'ts' }] } }],
+          mark: { type: 'rule', color: 'firebrick' },
         },
-      },
-    ],
+      ],
+    };
+  }
+  const upd = async (pos) => {
+    const nearPoint = $curplot?.curData
+      ?.map((e) => e.Video_time)
+      .find((v) => v >= pos);
+    if (nearPoint) {
+      await view
+        ?.signal('ts_tuple', {
+          unit: 'layer_1',
+          fields: [
+            {
+              field: 'Video_time',
+              channel: 'x',
+              type: 'E',
+            },
+          ],
+          values: [nearPoint],
+        })
+        .runAsync();
+    }
   };
 </script>
 
-<VegaLite {data} {spec} />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+  class="bar"
+  on:click={() => {
+    hidden = !hidden;
+  }}
+/>
+<div class="plot-container" class:hidden bind:clientHeight={height}>
+  <VegaLite bind:view data={$curplot} {spec} options={{ actions: false }} />
+</div>
+
+<style>
+  .plot-container {
+    flex: 1000 1000;
+    height: 100%;
+    padding: 0.5em;
+  }
+  .bar {
+    width: 8px;
+    background-color: gray;
+    border-left: 2px solid;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>

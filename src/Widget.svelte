@@ -9,7 +9,7 @@
   import WaveSurferControler from './WaveSurferControler.svelte';
   import DataTable from './DataTable.svelte';
   import Tagbox from './Tagbox.svelte';
-  // import Plots from './Plots.svelte';
+  import Plots from './Plots.svelte';
   import { processKey } from './util';
   import type { keyConfig } from './util';
 
@@ -112,9 +112,8 @@
       bind:volume
       on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
     />
-    <!-- {#if $plots.length}
-    <Plots/>
-    {/if} -->
+    <Plots bind:position />
+
     <!-- TODO? use <svelte:component> to make less verbose -->
     {#if $views.length}
       <Views views={$views} />
@@ -143,7 +142,6 @@
           wavesurfercontroller.setActiveRegion(e.detail)}
       />
     </div>
-    <!-- <Plots /> -->
     <Tagbox bind:this={tagbox} bind:position>
       {#if $curKeypoint.start}
         <button
