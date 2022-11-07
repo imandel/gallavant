@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { cueData, gps, views, timingObject, curKeypoint } from './stores';
+  import {
+    cueData,
+    gps,
+    views,
+    timingObject,
+    curKeypoint,
+    plots,
+  } from './stores';
   import type { DOMWidgetModel } from '@jupyter-widgets/base';
   import { onMount, SvelteComponent } from 'svelte';
   import Map from './Map.svelte';
@@ -112,8 +119,9 @@
       bind:volume
       on:onMainVidLoad={wavesurfercontroller.vidLoaded()}
     />
-    <Plots bind:position />
-
+    {#if $plots.length}
+      <Plots bind:position />
+    {/if}
     <!-- TODO? use <svelte:component> to make less verbose -->
     {#if $views.length}
       <Views views={$views} />

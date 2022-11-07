@@ -221,7 +221,7 @@ class MapView(DOMWidget):
                     self.review = pandas_validator(pd.read_json(review_path)).to_dict(
                         orient="records"
                     )
-        if plots is not None:
+        if plots != {}:
             # TODO if altair chart return spec, if array of altair charts return array of spec
             clean_spec = plots.to_dict()
             del clean_spec["datasets"]
