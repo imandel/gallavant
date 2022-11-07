@@ -240,11 +240,10 @@
   };
 
   onMount(async () => {
-      // console.log('helloooo01')
     curKeypoint.resetKeypoint();
     activeRegion = null;
     wavesurfer = null;
-    window.wavesurfer = wavesurfer = WaveSurfer.create({
+    wavesurfer = WaveSurfer.create({
       container: waveform,
       waveColor: '#bab5ff',
       progressColor: '#1e429f',
